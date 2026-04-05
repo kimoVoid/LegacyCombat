@@ -43,7 +43,8 @@ public abstract class FoodDataMixin {
                 serverPlayer.connection.send(new ClientboundSetHealthPacket(serverPlayer.getBukkitEntity().getScaledHealth(), this.foodLevel, this.saturationLevel));
             }
         }
-        boolean bl = (Boolean)serverLevel.getGameRules().get(GameRules.NATURAL_HEALTH_REGENERATION);
+
+        boolean bl = serverLevel.getGameRules().get(GameRules.NATURAL_HEALTH_REGENERATION);
         if (bl && this.foodLevel >= 18 && serverPlayer.isHurt()) {
             ++this.tickTimer;
             if (this.tickTimer >= 80) {

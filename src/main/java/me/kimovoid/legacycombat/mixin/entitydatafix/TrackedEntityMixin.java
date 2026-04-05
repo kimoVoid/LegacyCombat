@@ -58,10 +58,7 @@ public class TrackedEntityMixin {
         }
 
         /* Fake deaths */
-        if (p.getBukkitEntity().hasMetadata("fakingDeath")
-                && p.getEntityData().get(LivingEntity.DATA_HEALTH_ID) <= 0.0F
-                && LegacyCombat.CONFIG.enableFakeDeaths) {
-
+        if (p.getBukkitEntity().hasMetadata("fakingDeath") && p.getEntityData().get(LivingEntity.DATA_HEALTH_ID) <= 0.0F) {
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).id() != LivingEntity.DATA_HEALTH_ID.id()) continue;
                 list.set(i, new SynchedEntityData.DataValue<>(

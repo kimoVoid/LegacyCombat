@@ -15,9 +15,7 @@ public class LCConfig {
     private final static String ATTACK_FREQUENCY = "attack-frequency";
     private final static String PROJECTILE_TICK_TIME = "projectile-tick-time";
     private final static String ROD_VELOCITY = "rod-velocity";
-    private final static String ENABLE_FAKE_DEATHS = "enable-fake-deaths";
     private final static String INFLATE_HITBOXES = "inflate-hitboxes";
-    private final static String INFLATE_HITBOXES_NEW = "inflate-hitboxes-new";
 
     /* Entity KB */
     private final static String EXPERIMENTAL_KB = "knockback.experimental";
@@ -42,9 +40,7 @@ public class LCConfig {
     public int attackFrequency;
     public int projTickTime;
     public double rodVelocity;
-    public boolean enableFakeDeaths;
     public float inflateHitboxes;
-    public boolean inflateHitboxesNew;
 
     public boolean kbExperimental;
     public double kbFriction;
@@ -69,10 +65,7 @@ public class LCConfig {
         this.attackFrequency = this.config.getInt(ATTACK_FREQUENCY, 20);
         this.projTickTime = this.config.getInt(PROJECTILE_TICK_TIME, 5);
         this.rodVelocity = this.config.getDouble(ROD_VELOCITY, 1.4);
-        this.enableFakeDeaths = this.config.getBoolean(ENABLE_FAKE_DEATHS, true);
-        this.inflateHitboxes = (float) this.config.getDouble(INFLATE_HITBOXES, 0.1);
-        this.inflateHitboxesNew = this.config.getBoolean(INFLATE_HITBOXES_NEW, false);
-
+        this.inflateHitboxes = (float) this.config.getDouble(INFLATE_HITBOXES, 0.05);
 
         this.kbExperimental = this.config.getBoolean(EXPERIMENTAL_KB, false);
         this.kbFriction = this.config.getDouble(KB_FRICTION, 2.0);
@@ -98,9 +91,7 @@ public class LCConfig {
         this.config.set(ATTACK_FREQUENCY, this.attackFrequency);
         this.config.set(PROJECTILE_TICK_TIME, this.projTickTime);
         this.config.set(ROD_VELOCITY, this.rodVelocity);
-        this.config.set(ENABLE_FAKE_DEATHS, this.enableFakeDeaths);
         this.config.set(INFLATE_HITBOXES, this.inflateHitboxes);
-        this.config.set(INFLATE_HITBOXES_NEW, this.inflateHitboxesNew);
 
         this.config.set(EXPERIMENTAL_KB, this.kbExperimental);
         this.config.set(KB_FRICTION, this.kbFriction);

@@ -1,4 +1,4 @@
-package me.kimovoid.legacycombat.mixin.nocooldown;
+package me.kimovoid.legacycombat.mixin.attackcooldown;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.server.level.ServerPlayer;

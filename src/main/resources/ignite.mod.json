@@ -1,6 +1,6 @@
 {
   "id": "legacycombat",
-  "version": "1.0",
+  "version": "2.0",
   "mixins": [
     "legacycombat.mixins.json"
   ]

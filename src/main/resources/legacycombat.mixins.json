@@ -6,22 +6,16 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "armor.CombatRulesMixin",
+    "attackcooldown.ServerPlayerMixin",
     "attackfrequency.LivingEntityMixin",
     "attackparticles.PlayerMixin",
     "command.SimpleCommandMapMixin",
     "crits.PlayerMixin",
     "entitydatafix.TrackedEntityMixin",
-    "hitbox.CraftPlayerMixin",
-    "hitbox.PlayerListMixin",
-    "hitbox.ServerEntityMixin",
-    "hitbox.ServerGamePacketListenerImplMixin",
-    "hitbox.ServerPlayerMixin",
+    "hitbox.EntityMixin",
     "hurtcam.ServerPlayerMixin",
-    "knockback.LivingEntityMixin",
-    "knockback.PlayerMixin",
+    "itemcomponents.ItemStackMixin",
     "misc.CraftServerMixin",
-    "nocooldown.ItemStackMixin",
-    "nocooldown.ServerPlayerMixin",
     "offhandfix.ServerPlayerGameModeMixin",
     "projectiles.AbstractArrowMixin",
     "projectiles.FishingHookMixin",
@@ -31,8 +25,6 @@
     "regen.FoodDataMixin",
     "sounds.FishingRodItemMixin",
     "sounds.PlayerMixin",
-    "sweep.PlayerMixin",
-    "swordblocking.ItemStackMixin",
-    "swordblocking.LivingEntityMixin"
+    "sweep.PlayerMixin"
   ]
 }

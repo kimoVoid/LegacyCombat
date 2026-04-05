@@ -2,18 +2,11 @@ package me.kimovoid.legacycombat.command;
 
 import com.google.common.collect.ImmutableList;
 import me.kimovoid.legacycombat.LegacyCombat;
-import me.kimovoid.legacycombat.mixinterface.IServerPlayer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.block.AnvilBlock;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
-import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +25,7 @@ public class LegacyCombatCommand extends BukkitCommand {
         if (!this.testPermission(sender))
             return false;
 
-        if (args.length < 1 || !(args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("show-hitboxes")) && args.length < 2) {
+        if (args.length < 1 || !args[0].equalsIgnoreCase("reload") && args.length < 2) {
             MiniMessage mm = MiniMessage.miniMessage();
             Component message = mm.deserialize("<gradient:#ff4a3d:#ff8e52>ʟᴇɢᴀᴄʏ ᴄᴏᴍʙᴀᴛ ꜱᴇᴛᴛɪɴɢꜱ</gradient><reset>")
                     .append(mm.deserialize("<br><gray>General:"))
@@ -40,7 +33,6 @@ public class LegacyCombatCommand extends BukkitCommand {
                     .append(this.getValueMessage(mm, "attack-frequency", LegacyCombat.CONFIG.attackFrequency))
                     .append(this.getValueMessage(mm, "projectile-tick-time", LegacyCombat.CONFIG.projTickTime))
                     .append(this.getValueMessage(mm, "rod-velocity", LegacyCombat.CONFIG.rodVelocity))
-                    .append(this.getValueMessage(mm, "enable-fake-deaths", LegacyCombat.CONFIG.enableFakeDeaths))
                     .append(this.getValueMessage(mm, "inflate-hitboxes", LegacyCombat.CONFIG.inflateHitboxes))
                     .append(mm.deserialize("<br><gray>Knockback:"))
                     .append(this.getValueMessage(mm, "kb-experimental", LegacyCombat.CONFIG.kbExperimental))
@@ -71,35 +63,11 @@ public class LegacyCombatCommand extends BukkitCommand {
             return true;
         }
 
-        if (args[0].equalsIgnoreCase("show-hitboxes")) {
-            if (!(sender instanceof Player p)) {
-                return true;
-            }
-
-            ServerPlayer player = ((CraftPlayer)p).getHandle();
-            for (ServerPlayer on : player.level().players()) {
-                IServerPlayer hitboxPlayer = (IServerPlayer) on;
-                ServerPlayer hitboxEntity = hitboxPlayer.lc_getHitboxEntity();
-
-                hitboxPlayer.lc_getHitboxEntity().setGlowingTag(true);
-                SynchedEntityData entityData = hitboxEntity.getEntityData();
-                List<SynchedEntityData.DataValue<?>> list = entityData.packDirty();
-                if (list != null) {
-                    player.connection.send(new ClientboundSetEntityDataPacket(hitboxEntity.getId(), list));
-                }
-                hitboxPlayer.lc_getHitboxEntity().setGlowingTag(false);
-            }
-
-            sender.sendMessage("Showing all hitbox entities (relog to unsee)");
-            return true;
-        }
-
         switch (args[0].toLowerCase()) {
             case "debug" -> LegacyCombat.CONFIG.debug = Boolean.parseBoolean(args[1]);
             case "attack-frequency" -> LegacyCombat.CONFIG.attackFrequency = getValueInt(args[1]);
             case "projectile-tick-time" -> LegacyCombat.CONFIG.projTickTime = getValueInt(args[1]);
             case "rod-velocity" -> LegacyCombat.CONFIG.rodVelocity = getValueDouble(args[1]);
-            case "enable-fake-deaths" -> LegacyCombat.CONFIG.enableFakeDeaths = Boolean.parseBoolean(args[1]);
             case "inflate-hitboxes" -> LegacyCombat.CONFIG.inflateHitboxes = (float) getValueDouble(args[1]);
             case "kb-experimental" -> LegacyCombat.CONFIG.kbExperimental = Boolean.parseBoolean(args[1]);
             case "kb-friction" -> LegacyCombat.CONFIG.kbFriction = getValueDouble(args[1]);
@@ -146,12 +114,10 @@ public class LegacyCombatCommand extends BukkitCommand {
             String toComplete = args[0].toLowerCase();
             String[] values = {
                     "reload",
-                    "show-hitboxes",
                     "debug",
                     "attack-frequency",
                     "projectile-tick-time",
                     "rod-velocity",
-                    "enable-fake-deaths",
                     "inflate-hitboxes",
                     "kb-experimental",
                     "kb-friction",
