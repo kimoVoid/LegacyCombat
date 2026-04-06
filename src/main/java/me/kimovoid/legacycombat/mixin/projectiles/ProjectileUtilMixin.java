@@ -28,6 +28,6 @@ public class ProjectileUtilMixin {
             )
     )
     private static Optional<Vec3> replaceClip(AABB instance, Vec3 from, Vec3 to, @Local(argsOnly = true) Entity entity) {
-        return LegacyProjectileUtil.INSTANCE.clip(instance.inflate(LegacyCombat.CONFIG.inflateHitboxes * 2), from, to);
+        return LegacyProjectileUtil.INSTANCE.clip(instance.inflate(LegacyCombat.CONFIG.inflateHitboxes), from, to);
     }
 }

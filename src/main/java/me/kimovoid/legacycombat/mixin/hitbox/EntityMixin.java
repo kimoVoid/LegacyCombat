@@ -12,6 +12,6 @@ public class EntityMixin {
 
     @Inject(method = "getPickRadius", at = @At("RETURN"), cancellable = true)
     private void setHitboxInflation(CallbackInfoReturnable<Float> cir) {
-        cir.setReturnValue(cir.getReturnValue() + LegacyCombat.CONFIG.inflateHitboxes * 2);
+        cir.setReturnValue(cir.getReturnValue() + LegacyCombat.CONFIG.inflateHitboxes);
     }
 }

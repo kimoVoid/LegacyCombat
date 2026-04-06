@@ -37,9 +37,9 @@ public abstract class ItemStackMixin {
     )
     private void applyComponents(CallbackInfo ci) {
         /* Hitbox margin */
-        float margin = 0.05f;
+        float margin = 0.075f;
         try {
-            margin = LegacyCombat.CONFIG.inflateHitboxes;
+            margin = LegacyCombat.CONFIG.inflateHitboxesItem;
         } catch (Exception ignored) { // during startup
         }
 

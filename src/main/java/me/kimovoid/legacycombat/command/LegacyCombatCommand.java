@@ -34,6 +34,7 @@ public class LegacyCombatCommand extends BukkitCommand {
                     .append(this.getValueMessage(mm, "projectile-tick-time", LegacyCombat.CONFIG.projTickTime))
                     .append(this.getValueMessage(mm, "rod-velocity", LegacyCombat.CONFIG.rodVelocity))
                     .append(this.getValueMessage(mm, "inflate-hitboxes", LegacyCombat.CONFIG.inflateHitboxes))
+                    .append(this.getValueMessage(mm, "inflate-hitboxes-item", LegacyCombat.CONFIG.inflateHitboxesItem))
                     .append(mm.deserialize("<br><gray>Knockback:"))
                     .append(this.getValueMessage(mm, "kb-experimental", LegacyCombat.CONFIG.kbExperimental))
                     .append(this.getValueMessage(mm, "kb-friction", LegacyCombat.CONFIG.kbFriction))
@@ -69,6 +70,7 @@ public class LegacyCombatCommand extends BukkitCommand {
             case "projectile-tick-time" -> LegacyCombat.CONFIG.projTickTime = getValueInt(args[1]);
             case "rod-velocity" -> LegacyCombat.CONFIG.rodVelocity = getValueDouble(args[1]);
             case "inflate-hitboxes" -> LegacyCombat.CONFIG.inflateHitboxes = (float) getValueDouble(args[1]);
+            case "inflate-hitboxes-item" -> LegacyCombat.CONFIG.inflateHitboxesItem = (float) getValueDouble(args[1]);
             case "kb-experimental" -> LegacyCombat.CONFIG.kbExperimental = Boolean.parseBoolean(args[1]);
             case "kb-friction" -> LegacyCombat.CONFIG.kbFriction = getValueDouble(args[1]);
             case "kb-horizontal" -> LegacyCombat.CONFIG.kbHorizontal = getValueDouble(args[1]);
@@ -119,6 +121,7 @@ public class LegacyCombatCommand extends BukkitCommand {
                     "projectile-tick-time",
                     "rod-velocity",
                     "inflate-hitboxes",
+                    "inflate-hitboxes-item",
                     "kb-experimental",
                     "kb-friction",
                     "kb-horizontal",
