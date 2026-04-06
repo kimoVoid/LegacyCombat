@@ -43,13 +43,15 @@ public abstract class ItemStackMixin {
         } catch (Exception ignored) { // during startup
         }
 
-        AttackRange rangeComponent = new AttackRange(0, 3.0f, 0, 3.0f, margin, 1.0f);
-        this.applyComponents(DataComponentPatch.builder().set(DataComponents.ATTACK_RANGE, rangeComponent).build());
+        if (!this.getComponents().has(DataComponents.ATTACK_RANGE)) {
+            AttackRange rangeComponent = new AttackRange(0, 3.0f, 0, 3.0f, margin, 1.0f);
+            this.applyComponents(DataComponentPatch.builder().set(DataComponents.ATTACK_RANGE, rangeComponent).build());
+        }
 
         /* Sword blocking */
         if (this.getItem() != null && this.getItem().getDescriptionId().contains("sword")) {
-            Consumable consumableComponent = Consumable.builder().consumeSeconds(Float.MAX_VALUE).animation(ItemUseAnimation.BLOCK).build();
             if (!this.getComponents().has(DataComponents.CONSUMABLE)) {
+                Consumable consumableComponent = Consumable.builder().consumeSeconds(Float.MAX_VALUE).animation(ItemUseAnimation.BLOCK).build();
                 this.applyComponents(DataComponentPatch.builder().set(DataComponents.CONSUMABLE, consumableComponent).build());
             }
         }
