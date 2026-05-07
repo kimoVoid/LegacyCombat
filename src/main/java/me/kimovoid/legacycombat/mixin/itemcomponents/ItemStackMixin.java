@@ -37,15 +37,14 @@ public abstract class ItemStackMixin {
     )
     private void applyComponents(CallbackInfo ci) {
         /* Hitbox margin */
-        float margin = 0.075f;
         try {
-            margin = LegacyCombat.CONFIG.inflateHitboxesItem;
-        } catch (Exception ignored) { // during startup
-        }
-
-        if (!this.getComponents().has(DataComponents.ATTACK_RANGE)) {
-            AttackRange rangeComponent = new AttackRange(0, 3.0f, 0, 3.0f, margin, 1.0f);
-            this.applyComponents(DataComponentPatch.builder().set(DataComponents.ATTACK_RANGE, rangeComponent).build());
+            float margin = LegacyCombat.CONFIG.inflateHitboxesItem;
+            if (!this.getComponents().has(DataComponents.ATTACK_RANGE) && margin != 0) {
+                AttackRange rangeComponent = new AttackRange(0, 3.0f, 0, 3.0f, margin, 1.0f);
+                this.applyComponents(DataComponentPatch.builder().set(DataComponents.ATTACK_RANGE, rangeComponent).build());
+            }
+        } catch (Exception ignored) {
+            /* This is before config is loaded so we don't apply the component yet */
         }
 
         /* Sword blocking */
