@@ -2,36 +2,29 @@ name: "build"
 
 on:
   push:
-    branches: "**"
-    tags-ignore: ["**"]
+    branches: [ "main" ]
   pull_request:
-
-concurrency:
-  group: "${{ github.workflow }}-${{ github.event.number || github.ref }}"
-  cancel-in-progress: true
-
-permissions:
-  actions: "write"
-  contents: "read"
-
-env:
-  RUNTIME_VERSION: 21
-  GRADLE_WARNING_MODE: 'fail'
+    branches: [ "main" ]
 
 jobs:
   build:
-    # Only run on PRs if the source branch is on someone else's repo
-    if: "${{ github.event_name != 'pull_request' || github.repository != github.event.pull_request.head.repo.full_name }}"
-    strategy:
-      matrix:
-        os: ["ubuntu-latest", "windows-latest"]
-    runs-on: "${{ matrix.os }}"
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+
     steps:
-      - name: "setup environment"
-        id: "setup"
-        uses: "KyoriPowered/.github/.github/actions/setup-java-env@trunk"
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
         with:
-          runtime_version: "${{ env.RUNTIME_VERSION }}"
-          gradle_warning_mode: "${{ env.GRADLE_WARNING_MODE }}"
-      - name: "run gradle build"
-        run: "./gradlew build"
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build with Gradle Wrapper
+        run: ./gradlew build
