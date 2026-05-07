@@ -1,30 +1,25 @@
 name: "build"
-
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [pull_request, push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    permissions:
-      actions: write
-      contents: read
-
+    runs-on: ubuntu-22.04
     steps:
-      - name: Checkout sources
+      - name: Checkout Repository
         uses: actions/checkout@v4
-
-      - name: Set up JDK
+      - name: Validate Gradle
+        uses: gradle/actions/wrapper-validation@v4
+      - name: Setup JDK-21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
-
-      - name: Build with Gradle Wrapper
+      - name: Make Gradle Executable
+        run: chmod +x ./gradlew
+      - name: Build
         run: ./gradlew build
+      - name: Upload Built Jars
+        uses: actions/upload-artifact@v4
+        with:
+          name: Artifacts
+          path: build/libs/
