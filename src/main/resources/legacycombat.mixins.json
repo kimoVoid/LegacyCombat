@@ -19,6 +19,7 @@
     "knockback.PlayerMixin",
     "misc.CraftServerMixin",
     "offhandfix.ServerPlayerGameModeMixin",
+    "pearl.ThrownEnderpearlMixin",
     "projectiles.AbstractArrowMixin",
     "projectiles.FishingHookMixin",
     "projectiles.ProjectileKnockbackMixin",

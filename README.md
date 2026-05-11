@@ -10,6 +10,7 @@ An [Ignite](https://github.com/vectrix-space/ignite) mod that ports the entirety
     - Old fishing hook velocity
     - Removed relative velocity
     - Accurate bow boosts
+    - Removed randomness
 - ⭐ Applied item components:
     - Consumable component on swords (sword blocking)
     - Hitbox margin component on every item (same as pre-1.9)
@@ -27,6 +28,7 @@ An [Ignite](https://github.com/vectrix-space/ignite) mod that ports the entirety
 - Entity data fix
   - Fixes double sneaking animation
   - Fixes double use/consume animation
+- Removed ender pearls retaining player's velocity
 
 ## Usage
 You need to be running a server with Ignite. [Here](https://github.com/vectrix-space/ignite?tab=readme-ov-file#install) are the instructions to use it - then, all you need to do is put this mod in the `mods` folder.
